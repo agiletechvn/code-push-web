@@ -81,7 +81,7 @@ class ChangePassword extends Component {
     }
     return (
       <div style={{height:650, paddingLeft: 20, paddingRight:20 }}>
-        <Panel header="修改密码" style={{ maxWidth:350, marginLeft:"auto", marginRight: "auto" }}>
+        <Panel header="Change Password" style={{ maxWidth:350, marginLeft:"auto", marginRight: "auto" }}>
           <Form>
             <FormGroup>
               <ControlLabel>原密码</ControlLabel>
