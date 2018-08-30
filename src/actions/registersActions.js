@@ -11,37 +11,36 @@ export function registerChangeEmailInput(email) {
 
 function requestRegisterCheckEmail() {
   return {
-    type: types.REQUEST_REGISTER_CHECK_EMAIL,
-  }
+    type: types.REQUEST_REGISTER_CHECK_EMAIL
+  };
 }
 
 function receiveRegisterCheckEmail(data) {
   return {
     type: types.RECEIVE_REGISTER_CHECK_EMAIL,
-    payload: data,
-  }
+    payload: data
+  };
 }
 
 function receiveRegisterCheckEmailError(error) {
   return {
     type: types.RECEIVE_REGISTER_CHECK_EMAIL_ERROR,
-    payload: error,
-  }
+    payload: error
+  };
 }
 
 export function registerCheckEmail(email) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestRegisterCheckEmail());
-    return restApi.checkEmailExists(email)
-    .then(data => {
-      if (_.get(data,'status') == "OK" && _.get(data, 'exists') == false) {
+    return restApi.checkEmailExists(email).then(data => {
+      if (_.get(data, 'status') == 'OK' && _.get(data, 'exists') == false) {
         dispatch(receiveRegisterCheckEmail(data));
       } else {
-        var message = `${email} 已经注册了，请更换其他邮箱注册`
-        if (_.get(data,'status') != "OK") {
+        var message = `${email} already registered, please change another email`;
+        if (_.get(data, 'status') != 'OK') {
           message = _.get(data, 'message');
         }
-        dispatch(receiveRegisterCheckEmailError({message: message}));
+        dispatch(receiveRegisterCheckEmailError({ message: message }));
       }
     });
   };
@@ -56,34 +55,33 @@ export function registerChangeValidateCodeInput(validateCode) {
 
 function requestRegisterSendValidateCode() {
   return {
-    type: types.REQUEST_REGISTER_SEND_VALIDATE_CODE,
-  }
+    type: types.REQUEST_REGISTER_SEND_VALIDATE_CODE
+  };
 }
 
 function receiveRegisterSendValidateCode(data) {
   return {
     type: types.RECEIVE_REGISTER_SEND_VALIDATE_CODE,
-    payload: data,
-  }
+    payload: data
+  };
 }
 
 function receiveRegisterSendValidateCodeError(error) {
   return {
     type: types.RECEIVE_REGISTER_SEND_VALIDATE_CODE_ERROR,
-    payload: error,
-  }
+    payload: error
+  };
 }
 
 export function registerSendValidateCode(email) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestRegisterSendValidateCode());
-    return restApi.sendRegisterCode(email)
-    .then(data => {
-      if (_.get(data, 'status') == "OK") {
+    return restApi.sendRegisterCode(email).then(data => {
+      if (_.get(data, 'status') == 'OK') {
         dispatch(receiveRegisterSendValidateCode(data));
       } else {
         var message = _.get(data, 'message');
-        dispatch(receiveRegisterSendValidateCodeError({message: message}));
+        dispatch(receiveRegisterSendValidateCodeError({ message: message }));
       }
     });
   };
@@ -91,34 +89,33 @@ export function registerSendValidateCode(email) {
 
 function requestRegisterCheckCodeExists() {
   return {
-    type: types.REQUEST_REGISTER_CHECK_CODE_EXISTS,
-  }
+    type: types.REQUEST_REGISTER_CHECK_CODE_EXISTS
+  };
 }
 
 function receiveRegisterCheckCodeExists(data) {
   return {
     type: types.RECEIVE_REGISTER_CHECK_CODE_EXISTS,
-    payload: data,
-  }
+    payload: data
+  };
 }
 
 function receiveRegisterCheckCodeExistsError(error) {
   return {
     type: types.RECEIVE_REGISTER_CHECK_CODE_EXISTS_ERROR,
-    payload: error,
-  }
+    payload: error
+  };
 }
 
 export function registerCheckCodeExists(email, validateCode) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestRegisterCheckCodeExists());
-    return restApi.checkRegisterCodeExists(email, validateCode)
-    .then(data => {
-      if (_.get(data, 'status') == "OK") {
+    return restApi.checkRegisterCodeExists(email, validateCode).then(data => {
+      if (_.get(data, 'status') == 'OK') {
         dispatch(receiveRegisterCheckCodeExists(data));
       } else {
         var message = _.get(data, 'message');
-        dispatch(receiveRegisterCheckCodeExistsError({message: message}));
+        dispatch(receiveRegisterCheckCodeExistsError({ message: message }));
       }
     });
   };
@@ -140,39 +137,38 @@ export function registerChangePasswordConfirmInput(passwordConfirm) {
 
 function requestRegister() {
   return {
-    type: types.REQUEST_REGISTER,
-  }
+    type: types.REQUEST_REGISTER
+  };
 }
 
 function receiveRegister(data) {
   return {
     type: types.RECEIVE_REGISTER,
-    payload: data,
-  }
+    payload: data
+  };
 }
 
 function receiveRegisterError(error) {
   return {
     type: types.RECEIVE_REGISTER_ERROR,
-    payload: error,
-  }
+    payload: error
+  };
 }
 
 export function register(email, password, validateCode) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestRegister());
-    return restApi.register(email, password, validateCode)
-    .then(data => {
-      if (_.get(data, 'status') == "OK") {
+    return restApi.register(email, password, validateCode).then(data => {
+      if (_.get(data, 'status') == 'OK') {
         dispatch(receiveRegister(data));
       } else {
         var message = _.get(data, 'message');
-        dispatch(receiveRegisterError({message: message}));
+        dispatch(receiveRegisterError({ message: message }));
       }
     });
   };
 }
 
 export function registerClean() {
-  return {type: types.RECEIVE_REGISTER_CLEAN}
+  return { type: types.RECEIVE_REGISTER_CLEAN };
 }
