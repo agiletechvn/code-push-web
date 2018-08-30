@@ -5,7 +5,7 @@ import {
   Form,
   FormGroup,
   FormControl,
-  Button,
+  Button
 } from 'react-bootstrap';
 
 class StepThree extends Component {
@@ -16,33 +16,33 @@ class StepThree extends Component {
     passwordConfirm: PropTypes.string,
     passwordConfirmInputChange: PropTypes.func,
     submit: PropTypes.func,
-    error: PropTypes.object,
-  }
+    error: PropTypes.object
+  };
 
   static defaultProps = {
     isFetching: false,
     password: '',
-    passwordInputChange: (password)=>{},
+    passwordInputChange: password => {},
     passwordConfirm: '',
-    passwordConfirmInputChange: (passwordConfirm)=>{},
-    submit: ()=>{},
-    error: {},
-  }
+    passwordConfirmInputChange: passwordConfirm => {},
+    submit: () => {},
+    error: {}
+  };
 
   constructor() {
     super();
-    this.state = {field1: false, field2: false}
+    this.state = { field1: false, field2: false };
     this.setInputPassword = this.setInputPassword.bind(this);
     this.setInputPasswordConfirm = this.setInputPasswordConfirm.bind(this);
   }
 
   setInputPassword(event) {
-    this.setState({field1: true});
+    this.setState({ field1: true });
     this.props.passwordInputChange(event.target.value);
   }
 
   setInputPasswordConfirm(event) {
-    this.setState({field2: true});
+    this.setState({ field2: true });
     this.props.passwordConfirmInputChange(event.target.value);
   }
 
@@ -51,66 +51,67 @@ class StepThree extends Component {
     let passwordTips = '';
     let passwordConfirmTips = '';
     if (this.state.field1 && this.props.password.length < 6) {
-      passwordTips = '密码长度至少为6位'
+      passwordTips = 'Password must be at least 6 digits in length';
     }
-    if (this.state.field2 && !_.eq(this.props.passwordConfirm, this.props.password) ) {
-      passwordConfirmTips = '确认密码和密码不一致'
+    if (
+      this.state.field2 &&
+      !_.eq(this.props.passwordConfirm, this.props.password)
+    ) {
+      passwordConfirmTips = 'Confirm password and password are inconsistent';
     }
     let isValidate = false;
-    if (this.props.password.length>=6
-      && _.eq(this.props.passwordConfirm, this.props.password)) {
+    if (
+      this.props.password.length >= 6 &&
+      _.eq(this.props.passwordConfirm, this.props.password)
+    ) {
       isValidate = true;
     }
     var disabled = true;
-    if (!this.props.isFetching && isValidate){
-        disabled = false;
+    if (!this.props.isFetching && isValidate) {
+      disabled = false;
     }
     return (
-      <Form style={{  maxWidth:350, marginLeft:"auto", marginRight: "auto" }}>
+      <Form style={{ maxWidth: 350, marginLeft: 'auto', marginRight: 'auto' }}>
         <FormGroup>
-          <ControlLabel>密码</ControlLabel>
+          <ControlLabel>Password</ControlLabel>
           <FormControl
             onChange={this.setInputPassword}
-            onBlur={()=>this.setState({field1: true})}
+            onBlur={() => this.setState({ field1: true })}
             value={this.props.password}
             type="password"
-            placeholder="请输入密码"
+            placeholder="Please enter your password"
             autoComplete="off"
             autoFocus
-            />
+          />
         </FormGroup>
         <FormGroup>
-          <div style={{ color:'red' }} >
-          {passwordTips}
-          </div>
+          <div style={{ color: 'red' }}>{passwordTips}</div>
         </FormGroup>
 
         <FormGroup>
-          <ControlLabel>确认密码</ControlLabel>
+          <ControlLabel>Confirm password</ControlLabel>
           <FormControl
             onChange={this.setInputPasswordConfirm}
-            onBlur={()=>this.setState({field2: true})}
+            onBlur={() => this.setState({ field2: true })}
             type="password"
             value={this.props.passwordConfirm}
-            placeholder="请再次输入密码"
+            placeholder="Please enter your password again"
             autoComplete="off"
-            />
+          />
         </FormGroup>
         <FormGroup>
-          <div style={{ color:'red' }} >
-          {passwordConfirmTips}
-          </div>
+          <div style={{ color: 'red' }}>{passwordConfirmTips}</div>
         </FormGroup>
         <FormGroup style={{ paddingTop: 20 }}>
-          <div style={{ color:'red' }} >
-          {_.get(this.props, 'error.message')}
+          <div style={{ color: 'red' }}>
+            {_.get(this.props, 'error.message')}
           </div>
         </FormGroup>
         <FormGroup>
           <Button
-            style={{width: "100%"}}
+            style={{ width: '100%' }}
             bsStyle="primary"
-            onClick={()=>{
+            onClick={() => {
               if (disabled) {
                 return;
               }
@@ -118,7 +119,7 @@ class StepThree extends Component {
             }}
             disabled={disabled}
           >
-          注册
+            Register
           </Button>
         </FormGroup>
       </Form>

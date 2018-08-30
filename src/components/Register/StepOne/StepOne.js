@@ -6,7 +6,7 @@ import {
   Form,
   FormGroup,
   FormControl,
-  Button,
+  Button
 } from 'react-bootstrap';
 import Link from '../../Link';
 
@@ -16,16 +16,16 @@ class StepOne extends Component {
     email: PropTypes.string,
     emailInputChange: PropTypes.func,
     submit: PropTypes.func,
-    error: PropTypes.object,
-  }
+    error: PropTypes.object
+  };
 
   static defaultProps = {
     isChecking: false,
     email: '',
-    emailInputChange:(email)=>{},
-    submit: ()=>{},
-    error: {},
-  }
+    emailInputChange: email => {},
+    submit: () => {},
+    error: {}
+  };
 
   constructor() {
     super();
@@ -39,32 +39,32 @@ class StepOne extends Component {
     const self = this;
     var emailIsValidate = validator.isEmail(this.props.email);
     var disabled = true;
-    if (!this.props.isChecking && emailIsValidate){
-        disabled = false;
+    if (!this.props.isChecking && emailIsValidate) {
+      disabled = false;
     }
     return (
-      <Form style={{maxWidth: 350, marginLeft:"auto", marginRight: "auto"}}>
+      <Form style={{ maxWidth: 350, marginLeft: 'auto', marginRight: 'auto' }}>
         <FormGroup>
-          <ControlLabel>邮箱地址</ControlLabel>
+          <ControlLabel>Email address</ControlLabel>
           <FormControl
             onChange={this.setInputEmail}
             value={this.props.email}
             type="email"
-            placeholder="请输入邮箱地址"
+            placeholder="Please enter your email address"
             autoComplete="off"
             autoFocus
-            />
+          />
         </FormGroup>
         <FormGroup style={{ paddingTop: 20 }}>
-          <div style={{ color:'red' }} >
-          {_.get(this.props, 'error.message')}
+          <div style={{ color: 'red' }}>
+            {_.get(this.props, 'error.message')}
           </div>
         </FormGroup>
         <FormGroup>
           <Button
-            style={{width: "100%"}}
+            style={{ width: '100%' }}
             bsStyle="primary"
-            onClick={()=>{
+            onClick={() => {
               if (disabled) {
                 return;
               }
@@ -72,11 +72,11 @@ class StepOne extends Component {
             }}
             disabled={disabled}
           >
-          下一步
+            Next step
           </Button>
         </FormGroup>
         <FormGroup style={{ paddingTop: 28, textAlign: 'center' }}>
-          <Link to="/login">已有帐号</Link>
+          <Link to="/login">Your account</Link>
         </FormGroup>
       </Form>
     );

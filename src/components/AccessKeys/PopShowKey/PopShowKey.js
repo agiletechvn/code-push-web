@@ -1,18 +1,23 @@
-
 import React, { PropTypes, Component } from 'react';
-import {Modal, Button, FormGroup, FormControl, HelpBlock} from 'react-bootstrap';
+import {
+  Modal,
+  Button,
+  FormGroup,
+  FormControl,
+  HelpBlock
+} from 'react-bootstrap';
 
 class PopShowKey extends Component {
   static propTypes = {
     value: PropTypes.string,
     close: PropTypes.func,
-    showModal: PropTypes.bool,
+    showModal: PropTypes.bool
   };
 
   static defaultProps = {
     value: '',
     showModal: false,
-    close: ()=>{},
+    close: () => {}
   };
 
   constructor() {
@@ -28,32 +33,32 @@ class PopShowKey extends Component {
     return (
       <Modal show={this.props.showModal} onHide={this.close}>
         <Modal.Header closeButton>
-          <Modal.Title>创建密钥成功</Modal.Title>
+          <Modal.Title>Create key successfully</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormGroup validationState="success">
             <FormControl
               value={this.props.value}
-              onFocus={(event)=>{
+              onFocus={event => {
                 event.target.select();
               }}
-              onClick={(event)=>{
+              onClick={event => {
                 event.target.select();
               }}
-              onMouseOver={(event)=>{
+              onMouseOver={event => {
                 event.target.select();
               }}
               readOnly
               type="text"
             />
-            <HelpBlock>复制上面的密钥, 然后关闭弹框</HelpBlock>
+            <HelpBlock>Copy the above key, then close the box</HelpBlock>
           </FormGroup>
         </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.close}>关闭</Button>
-          </Modal.Footer>
+        <Modal.Footer>
+          <Button onClick={this.close}>Close</Button>
+        </Modal.Footer>
       </Modal>
-    )
+    );
   }
 }
 export default PopShowKey;

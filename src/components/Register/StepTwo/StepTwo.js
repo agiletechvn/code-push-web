@@ -68,12 +68,12 @@ class StepTwo extends Component {
           return <Button disabled>{second}</Button>;
         }}
         renderRetryFunc={times => {
-          let sendText = '发送邮件';
+          let sendText = 'Send email';
           if (times > 0) {
-            sendText = '重新发送';
+            sendText = 'Resend';
           }
           if (self.props.isSending) {
-            return <Button disabled>发送中</Button>;
+            return <Button disabled>Sending</Button>;
           }
           return (
             <Button
@@ -126,7 +126,7 @@ class StepTwo extends Component {
             }}
             disabled={disabled}
           >
-            下一步
+            Next step
           </Button>
         </FormGroup>
       </Form>
