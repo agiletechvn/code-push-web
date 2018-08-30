@@ -76,7 +76,7 @@ const appDetails = {
       'product'
     );
     return {
-      title: `${appName} 详情`,
+      title: `${appName} details`,
       chunk: 'product',
       component: (
         <LayoutContainer>

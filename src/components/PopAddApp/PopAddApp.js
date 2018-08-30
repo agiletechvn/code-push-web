@@ -1,4 +1,3 @@
-
 import React, { PropTypes, Component } from 'react';
 import {
   Modal,
@@ -15,7 +14,7 @@ import _ from 'lodash';
 
 const popoverFocus = (
   <Popover id="popover-trigger-focus">
-    只能包含字母和数字
+    Can only contain letters and numbers
   </Popover>
 );
 class PopAddApp extends Component {
@@ -31,14 +30,14 @@ class PopAddApp extends Component {
     isShowPlatformError: PropTypes.bool,
     os: PropTypes.string,
     platform: PropTypes.string,
-    appName: PropTypes.string,
+    appName: PropTypes.string
   };
 
   static defaultProps = {
-    onSubmit: (name)=>{},
+    onSubmit: name => {},
     isOnSubmiting: false,
-    close: ()=>{},
-    input: ()=>{},
+    close: () => {},
+    input: () => {},
     errorTip: '',
     showModal: false,
     isShowNameError: false,
@@ -46,7 +45,7 @@ class PopAddApp extends Component {
     isShowPlatformError: false,
     os: '',
     platform: '',
-    appName: '',
+    appName: ''
   };
 
   constructor() {
@@ -59,31 +58,31 @@ class PopAddApp extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  setPlatformSelect(event){
+  setPlatformSelect(event) {
     let select = event.target.value;
-    this.props.input({platform:select});
+    this.props.input({ platform: select });
   }
 
-  setSelect(event){
+  setSelect(event) {
     let select = event.target.value;
-    this.props.input({os:select});
+    this.props.input({ os: select });
   }
 
-  setName(event){
+  setName(event) {
     let name = event.target.value;
-    this.props.input({appName:name});
+    this.props.input({ appName: name });
   }
 
   validateName(name) {
     const REGEX = /^\w+$/;
     if (REGEX.test(name)) {
-      this.setState({isShowNameError:false});
+      this.setState({ isShowNameError: false });
     } else {
-      this.setState({isShowNameError:true});
+      this.setState({ isShowNameError: true });
     }
   }
 
-  onSubmit(){
+  onSubmit() {
     if (this.props.isOnSubmiting) {
       return;
     }
@@ -98,56 +97,74 @@ class PopAddApp extends Component {
     return (
       <Modal show={this.props.showModal} onHide={this.close}>
         <Modal.Header closeButton>
-          <Modal.Title>添加App</Modal.Title>
+          <Modal.Title>New app</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormGroup style={{display: 'inline-block',width: '40%'}} validationState={this.props.isShowNameError ? `error` : null}>
-            <ControlLabel>App名字</ControlLabel>
-            <OverlayTrigger trigger={["hover"]} placement="bottom" overlay={popoverFocus}>
-            <FormControl
-              type="text"
-              onChange={this.setName}
-              value={this.props.appName}
-              autoFocus
-            />
+          <FormGroup
+            style={{ display: 'inline-block', width: '40%' }}
+            validationState={this.props.isShowNameError ? `error` : null}
+          >
+            <ControlLabel>App name</ControlLabel>
+            <OverlayTrigger
+              trigger={['hover']}
+              placement="bottom"
+              overlay={popoverFocus}
+            >
+              <FormControl
+                type="text"
+                onChange={this.setName}
+                value={this.props.appName}
+                autoFocus
+              />
             </OverlayTrigger>
             <FormControl.Feedback />
           </FormGroup>
-          <FormGroup style={{display: 'inline-block',width: '20%',paddingLeft: 15}} validationState={this.props.isShowOSError ? `error` : null}>
-            <ControlLabel>平台</ControlLabel>
+          <FormGroup
+            style={{ display: 'inline-block', width: '20%', paddingLeft: 15 }}
+            validationState={this.props.isShowOSError ? `error` : null}
+          >
+            <ControlLabel>Platform</ControlLabel>
             <FormControl
               componentClass="select"
               value={this.props.os}
               onChange={this.setSelect}
             >
-              <option value="" >选择平台</option>
-              <option value="iOS" >iOS</option>
-              <option value="Android" >Android</option>
-              <option value="Windows" >Windows</option>
+              <option value="" />
+              <option value="iOS">iOS</option>
+              <option value="Android">Android</option>
+              <option value="Windows">Windows</option>
             </FormControl>
           </FormGroup>
-          <FormGroup style={{display: 'inline-block',width: '20%',paddingLeft: 15}} validationState={this.props.isShowPlatformError ? `error` : null}>
-            <ControlLabel>类型</ControlLabel>
+          <FormGroup
+            style={{ display: 'inline-block', width: '20%', paddingLeft: 15 }}
+            validationState={this.props.isShowPlatformError ? `error` : null}
+          >
+            <ControlLabel>Framework</ControlLabel>
             <FormControl
               componentClass="select"
               value={this.props.platform}
               onChange={this.setPlatformSelect}
             >
-              <option value="" >选择类型</option>
-              <option value="React-Native" >React-Native</option>
-              <option value="Cordova" >Cordova</option>
+              <option value="" />
+              <option value="React-Native">React-Native</option>
+              <option value="Cordova">Cordova</option>
             </FormControl>
           </FormGroup>
           <FormGroup validationState="error">
             <HelpBlock>{this.props.errorTip}</HelpBlock>
           </FormGroup>
         </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.close}>关闭</Button>
-            <Button onClick={this.onSubmit} disabled={this.props.isOnSubmiting ? true : false} >确定</Button>
-          </Modal.Footer>
+        <Modal.Footer>
+          <Button onClick={this.close}>Close</Button>
+          <Button
+            onClick={this.onSubmit}
+            disabled={this.props.isOnSubmiting ? true : false}
+          >
+            OK
+          </Button>
+        </Modal.Footer>
       </Modal>
-    )
+    );
   }
 }
 export default PopAddApp;
